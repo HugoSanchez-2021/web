@@ -1,0 +1,48 @@
+let ubicacionPrincipal = window.pageYOffset; //0
+
+  AOS.init();
+
+window.addEventListener("scroll", function(){
+    let desplazamientoActual = window.pageYOffset; //180
+    if(ubicacionPrincipal >= desplazamientoActual){ // 200 > 180
+        document.getElementsByTagName("nav")[0].style.top = "0px"
+    }else{
+        document.getElementsByTagName("nav")[0].style.top = "-100px"
+    }
+    ubicacionPrincipal= desplazamientoActual; //200
+
+})
+
+// Menu
+
+let enlacesHeader = document.querySelectorAll(".enlaces-header")[0];
+let semaforo = true;
+
+document.querySelectorAll(".hamburguer")[0].addEventListener("click", function(){
+    if(semaforo){
+        document.querySelectorAll(".hamburguer")[0].style.color ="#fff";
+        semaforo= false;
+    }else{
+        document.querySelectorAll(".hamburguer")[0].style.color ="#000";
+        semaforo= true;
+    }
+
+    enlacesHeader.classList.toggle("menudos")
+})
+
+
+ //formulario de contacto
+
+const $form = document.querySelector('#form')
+const $buttonMailto = document.querySelector('#informacion')
+
+$form.addEventListener('submit',handLeSubmit )
+
+function handLeSubmit(event) {
+    event.preventDefault()
+    const form  = new FormData(this)
+    console.log(form.get('name'))
+    $buttonMailto.setAttribute('href', `mailto:HugoSanchezWebDeveloper@gmail.com?subject=Mi nombre: ${form.get('name')} Mi correo: ${form.get('email')} &body=${form.get('message')}`)
+    $buttonMailto.click()
+}
+
